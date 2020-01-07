@@ -1,3 +1,14 @@
+let playerScore = 0;
+let computerScore = 0;
+let rounds = 0;
+
+const btn = Array.from(document.querySelectorAll('button'));
+        btn.forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (!btn.value) return;
+                playRound(btn.value)
+            });
+        })
 
 function computerPlay() {
     let randomNumber = Math.floor(Math.random() * 3);
@@ -14,44 +25,45 @@ function computerPlay() {
       };
     };
     
-function playRound(playerSelection, computerSelection) {
-    playerSelection = prompt('Choose: Rock - Paper - Scissors').toLowerCase();
+function playRound(playerSelection) {
     computerSelection = computerPlay();
 
     let gameRules = playerSelection === 'rock' && computerSelection === 'scissors' ||
                         playerSelection === 'paper' && computerSelection === 'rock'||
                             playerSelection === 'scissors' && computerSelection === 'paper';
     
+const player = document.getElementById('player-score');
+const computer = document.getElementById('computer-score');
+const resultP = document.createElement('p');
+
     if (playerSelection === computerSelection){
-        console.log(`Draw! both are ${playerSelection}`) ;
-
+        resultP.textContent = `draw`
     } else if (gameRules) {
-        playerScore++;
-        console.log(`You Win! ${playerSelection} beats ${computerSelection}`) ;
-
+        resultP.textContent = 'win'
+        playerScore++
+        player.textContent = playerScore;
     } else {
-        computerScore++;
-        console.log(`You Lose! ${computerSelection} beats ${playerSelection}`);    
+        resultP.textContent = `lost`
+        computerScore++
+        computer.textContent = computerScore;
   }
+const display = document.querySelector('.players');
+display.appendChild(resultP)
+  gameScore()
 };
 
-    let playerScore = 0;
-    let computerScore = 0;
 
-function playGame(rounds = 3) {
-    rounds = prompt('How Many Rounds?')
-
-    for ( let i = 0 ; i < rounds ; i++){
-        playRound()
+function gameScore() {
+rounds++
+const message = document.getElementById('message');
+    if (rounds === 5) {
+        if (playerScore > computerScore){
+            message.textContent = `You Win ${playerScore} to ${computerScore}`;
+        } else if (playerScore < computerScore){
+            message.textContent = `You Lose ${playerScore} to ${computerScore}`;
+        } else {
+            message.textContent = `Draw ${playerScore} to ${computerScore}`;
+        }
     };
-    if (playerScore > computerScore){
-        return `You Win ${playerScore} to ${computerScore}`
-    } else if (playerScore < computerScore){
-        return `You Lose ${playerScore} to ${computerScore}`
-    } else {
-        return `Draw ${playerScore} to ${computerScore}`
-      }
+
    };
-
-
-console.log(playGame())
