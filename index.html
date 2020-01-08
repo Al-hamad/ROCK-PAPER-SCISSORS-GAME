@@ -4,32 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ROCK-PAPER-SCISSORS GAME</title>
-    <link rel="stylesheet" href="style.css">
+    <title>ROCK-PAPER-SCISSORS</title>
+    <link rel="stylesheet" href="/style/style.css">
 </head>
 <body>
-    <div class="playbox">
-        <div class="btn">
-            <button value="rock">ROCK</button>
-            <button value="paper">PAPER</button>
-            <button value="scissors">SCISSORS</button>
-            <button onClick="window.location.reload();">Reset game</button>
+    <p>BEST OUT OF FIVE WINS!</p>
+    <div id="container">
+        <div class="btn-box">
+            <button class="reset">Reset Game</button>
+            <button value="rock" class="choice"><img src="/style/img/r.png"></button>
+            <button value="paper" class="choice"><img src="/style/img/p.png"></button>
+            <button value="scissors" class="choice"><img src="/style/img/s.png"></button>
         </div>
-        <h1>best out five</h1>
-        <div class="players">
-            <div class="player-box">
-                <h1>You</h1>
-                <h2 id="player-score">0</h2>
+        <div class="display">
+            <div id="player-card">
+                <h1>YOU</h1>
+                <img>
             </div>
-            <div class="player-box">
-                <h1>Computer</h1>
-                <h2 id="computer-score">0</h2>
+            <div class="result-card">
+                <h1 id="score">0 - 0</h1>
+                <h2></h2>
+            </div>
+            <div id="cpu-card">
+                <h1>CPU</h1>
+                <img>
             </div>
         </div>
-        <div>
-            <h1 id="message"></h1>
-        </div>
+        <h1 class="message"></h1>
     </div>
-    <script src="app.js"></script>
+
+
+    <script src="/app.js"></script>
 </body>
 </html>

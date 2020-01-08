@@ -1,17 +1,29 @@
 let playerScore = 0;
-let computerScore = 0;
-let rounds = 0;
+let cpuScore = 0;
+const score = document.querySelector('#score');
+const showWinner = document.querySelector('h2');
+const message =document.querySelector('.message');
 
-const btn = Array.from(document.querySelectorAll('button'));
-        btn.forEach(btn => {
-            btn.addEventListener('click', () => {
-                if (!btn.value) return;
-                playRound(btn.value)
-            });
-        })
+// Listen to buttons and call playGame()
+document.querySelectorAll('.choice').forEach(el =>{
+    el.addEventListener('click', () => {
+          message.textContent = ' ';
+          playGame(el.value);
+    });
+    });
 
-function computerPlay() {
-    let randomNumber = Math.floor(Math.random() * 3);
+// reset button
+function reset(){
+  message.textContent = ' ';
+  score.textContent = `${playerScore = 0} - ${cpuScore = 0}`;
+  showWinner.textContent = ' ';
+};
+document.querySelector('.reset').addEventListener('click', reset);
+  
+
+
+function cpuPlay() {
+  let randomNumber = Math.floor(Math.random() * 3);
     switch(randomNumber) {
         case 0:
           return 'rock'
@@ -24,46 +36,69 @@ function computerPlay() {
           break;
       };
     };
-    
-function playRound(playerSelection) {
-    computerSelection = computerPlay();
 
-    let gameRules = playerSelection === 'rock' && computerSelection === 'scissors' ||
-                        playerSelection === 'paper' && computerSelection === 'rock'||
-                            playerSelection === 'scissors' && computerSelection === 'paper';
-    
-const player = document.getElementById('player-score');
-const computer = document.getElementById('computer-score');
-const resultP = document.createElement('p');
+function playGame(playerSelection){
+  let cpuSelction = cpuPlay();
 
-    if (playerSelection === computerSelection){
-        resultP.textContent = `draw`
-    } else if (gameRules) {
-        resultP.textContent = 'win'
-        playerScore++
-        player.textContent = playerScore;
+  const winningRules = playerSelection === 'rock' && cpuSelction === 'scissors' || 
+                         playerSelection === 'scissors' && cpuSelction === 'paper' ||
+                           playerSelection === 'paper' && cpuSelction === 'rock';
+
+
+    if (playerSelection === cpuSelction){
+      showWinner.textContent = '=';
+    } else if (winningRules){
+      showWinner.textContent = '>';
+      score.textContent = `${++playerScore} - ${cpuScore}`;
     } else {
-        resultP.textContent = `lost`
-        computerScore++
-        computer.textContent = computerScore;
-  }
-const display = document.querySelector('.players');
-display.appendChild(resultP)
-  gameScore()
-};
+      showWinner.textContent = '<';
+      score.textContent = `${playerScore} - ${++cpuScore}`;
+    };
+    displayChoice(playerSelection,cpuSelction);
+  };
 
 
-function gameScore() {
-rounds++
-const message = document.getElementById('message');
-    if (rounds === 5) {
-        if (playerScore > computerScore){
-            message.textContent = `You Win ${playerScore} to ${computerScore}`;
-        } else if (playerScore < computerScore){
-            message.textContent = `You Lose ${playerScore} to ${computerScore}`;
-        } else {
-            message.textContent = `Draw ${playerScore} to ${computerScore}`;
-        }
+ // add image in the screan and show winner
+function displayChoice(player,cpu){
+    const message = document.querySelector('.message');
+        if (playerScore === 5){
+          message.textContent = `VICTORY! YOU WIN`;
+          playerScore=0;
+          cpuScore=0;
+        } else if (cpuScore === 5) {
+          message.textContent = `DEFEAT! YOU LOST`
+          playerScore=0;
+          cpuScore=0;      
+        };
+
+const playerCard = document.getElementById('player-card');
+const ImgPlayer = document.createElement("img");
+const cpuCard = document.getElementById('cpu-card');
+const ImgCpu = document.createElement("img");
+
+      switch(player) {
+        case 'rock':
+          ImgPlayer.src = "/style/img/r.png";
+          break;
+        case 'paper':
+          ImgPlayer.src = "/style/img/p.png";
+          break;
+        case 'scissors':
+          ImgPlayer.src = "/style/img/s.png";
+          break;
+      };
+      switch(cpu) {
+        case 'rock':
+          ImgCpu.src = "/style/img/r.png";
+          break;
+        case 'paper':
+          ImgCpu.src = "/style/img/p.png";
+          break;
+        case 'scissors':
+          ImgCpu.src = "/style/img/s.png";
+          break;
+        };
+      playerCard.replaceChild(ImgPlayer, playerCard.children[1]);
+      cpuCard.replaceChild(ImgCpu, cpuCard.children[1]);
     };
 
-   };
