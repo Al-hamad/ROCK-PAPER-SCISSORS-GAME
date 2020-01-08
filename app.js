@@ -78,24 +78,24 @@ const ImgCpu = document.createElement("img");
 
       switch(player) {
         case 'rock':
-          ImgPlayer.src = "/style/img/r.png";
+          ImgPlayer.src = "style/img/r.png";
           break;
         case 'paper':
-          ImgPlayer.src = "/style/img/p.png";
+          ImgPlayer.src = "style/img/p.png";
           break;
         case 'scissors':
-          ImgPlayer.src = "/style/img/s.png";
+          ImgPlayer.src = "style/img/s.png";
           break;
       };
       switch(cpu) {
         case 'rock':
-          ImgCpu.src = "/style/img/r.png";
+          ImgCpu.src = "style/img/r.png";
           break;
         case 'paper':
-          ImgCpu.src = "/style/img/p.png";
+          ImgCpu.src = "style/img/p.png";
           break;
         case 'scissors':
-          ImgCpu.src = "/style/img/s.png";
+          ImgCpu.src = "style/img/s.png";
           break;
         };
       playerCard.replaceChild(ImgPlayer, playerCard.children[1]);
